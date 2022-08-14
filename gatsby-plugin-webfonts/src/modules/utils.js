@@ -1,4 +1,3 @@
-import url from "url";
 import path from "path";
 import fs from "fs-extra";
 import axios from "axios";
@@ -78,7 +77,7 @@ export async function downloadFonts(css, downloadFolder, pathPrefix) {
 
   const fontSrcs = await Promise.all(
     fontUrls.map(async (fontUrl) => {
-      const { pathname } = url.parse(fontUrl);
+      const { pathname } = new URL(fontUrl);
       const filePath = path.join(downloadFolder, pathname);
 
       const font = await downloadFont(fontUrl);
