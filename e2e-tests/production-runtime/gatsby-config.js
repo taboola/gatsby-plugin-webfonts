@@ -12,6 +12,31 @@ module.exports = {
               variants: [`300`, `400`, `500`],
             },
           ],
+          google2: [
+            {
+              family: `Rubik`,
+              axes: `wght@300..600`,
+            },
+          ],
+          selfHosted: [
+            {
+              family: `Open Sans`,
+              urls: {
+                woff2: `/fonts/OpenSans300.woff2`,
+              },
+              fontStyle: `normal`,
+              fontWeight: 300,
+              display: `block`,
+            },
+            {
+              family: `Open Sans`,
+              urls: {
+                woff2: `/fonts/OpenSans400.woff2`,
+              },
+              fontStyle: `normal`,
+              fontWeight: 400,
+            },
+          ],
         },
       },
     },

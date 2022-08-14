@@ -26,6 +26,15 @@ export default function App() {
         <Typography variant="h4" component="h1" gutterBottom>
           Gatsby example
         </Typography>
+        <Typography
+          variant="p"
+          component="p"
+          fontFamily="Open Sans"
+          fontWeight={400}
+          data-testid="self-hosted-font"
+        >
+          Static Font Example
+        </Typography>
         <Link to="/about" color="secondary">
           Go to the about page
         </Link>
