@@ -14,7 +14,13 @@ export const onPreBootstrap = async (
   const { directory } = store.getState().program;
 
   const cacheFolder = path.join(directory, `.cache`, `webfonts`);
-  const publicFolder = path.join(directory, `public`, `static`, `webfonts`);
+  const publicFolder = path.join(
+    directory,
+    `public`,
+    pathPrefix,
+    `static`,
+    `webfonts`,
+  );
 
   const options = createOptions({
     ...pluginOptions,

@@ -21,7 +21,11 @@ export default function selfHosted({ directory, pathPrefix = `` }, reporter) {
       }
 
       const fileName = path.basename(url);
-      const cssDir = path.join(`/static`, `webfonts`);
+      const cssDir = path.join(
+        pathPrefix ? pathPrefix : `/`,
+        `static`,
+        `webfonts`,
+      );
       const outputDir = path.join(directory, `public`, cssDir);
 
       if (!existsSync(outputDir)) {

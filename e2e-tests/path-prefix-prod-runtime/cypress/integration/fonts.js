@@ -78,13 +78,13 @@ describe(`fonts`, () => {
 
   it(`successfully adds link to preload self hosted fonts`, () => {
     cy.get(`head`).within(() => {
-      cy.get(`link[href="/static/webfonts/OpenSans300.woff2"]`)
+      cy.get(`link[href="${pathPrefix}/static/webfonts/OpenSans300.woff2"]`)
         .should(`have.attr`, `rel`, `preload`)
         .and(`have.attr`, `as`, `font`)
         .and(`have.attr`, `type`, `font/woff2`);
     });
     cy.get(`head`).within(() => {
-      cy.get(`link[href="/static/webfonts/OpenSans400.woff2"]`)
+      cy.get(`link[href="${pathPrefix}/static/webfonts/OpenSans400.woff2"]`)
         .should(`have.attr`, `rel`, `preload`)
         .and(`have.attr`, `as`, `font`)
         .and(`have.attr`, `type`, `font/woff2`);
