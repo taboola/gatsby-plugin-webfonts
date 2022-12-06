@@ -7,7 +7,10 @@ const defaultFontOptions = {
   fontDisplay: `swap`,
 };
 
-export default function selfHosted({ directory, pathPrefix = `` }, reporter) {
+export default function selfHosted(
+  { cacheFolder, directory, pathPrefix = `` },
+  reporter,
+) {
   const getFontFace = async (font) => {
     const { family, urls, ...cssProperties } = createFontOptions(font);
 
@@ -26,15 +29,14 @@ export default function selfHosted({ directory, pathPrefix = `` }, reporter) {
         `static`,
         `webfonts`,
       );
-      const outputDir = path.join(directory, `public`, cssDir);
 
-      if (!existsSync(outputDir)) {
-        mkdirSync(outputDir, { recursive: true }, (err) => {
+      if (!existsSync(cacheFolder)) {
+        mkdirSync(cacheFolder, { recursive: true }, (err) => {
           reporter.error(err);
         });
       }
 
-      const outputPath = path.join(outputDir, fileName);
+      const outputPath = path.join(cacheFolder, fileName);
 
       copyFileSync(
         sourcePath,
