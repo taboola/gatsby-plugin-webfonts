@@ -6,7 +6,7 @@ import createOptions from "./create-options";
 import webFonts from "./web-fonts";
 
 export const onPreBootstrap = async (
-  { cache, createContentDigest, store, pathPrefix },
+  { cache, createContentDigest, store, pathPrefix, reporter },
   pluginOptions,
 ) => {
   if (isEmpty(pluginOptions.fonts)) return;
@@ -16,14 +16,19 @@ export const onPreBootstrap = async (
   const cacheFolder = path.join(directory, `.cache`, `webfonts`);
   const publicFolder = path.join(directory, `public`, `static`, `webfonts`);
 
-  const options = createOptions({ ...pluginOptions, cacheFolder, pathPrefix });
+  const options = createOptions({
+    ...pluginOptions,
+    cacheFolder,
+    pathPrefix,
+    directory,
+  });
 
   const optionsCacheKey = `options-${createContentDigest(options)}`;
 
   const cachedOptions = await cache.get(optionsCacheKey);
 
   if (!cachedOptions) {
-    await webFonts(options);
+    await webFonts(options, reporter);
     await cache.set(optionsCacheKey, options);
   }
 

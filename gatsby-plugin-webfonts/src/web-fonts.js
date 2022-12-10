@@ -4,11 +4,13 @@ import postcss from "postcss";
 import cssnano from "cssnano";
 
 import google from "./modules/google";
+import selfHosted from "./modules/selfHosted";
 
-export default async function webFonts(options) {
+export default async function webFonts(options, reporter) {
   const modules = {
     google: google(options, 1),
     google2: google(options, 2),
+    selfHosted: selfHosted(options, reporter),
   };
 
   const merge = async (css) => {

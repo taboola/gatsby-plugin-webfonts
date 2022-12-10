@@ -32,12 +32,25 @@ module.exports = {
         fonts: {
           google: [
             {
-              family: "Roboto",
+              family: "Roboto", // 'font-family' property
               variants: ["300", "400", "500"],
-              //subsets: ['latin']
-              //text: 'Hello'
-              //fontDisplay: 'swap',
-              //strategy: 'selfHosted' // 'base64' || 'cdn'
+              //subsets: ['latin'],
+              //text: 'Hello',
+              //fontDisplay: 'swap' || 'auto' || 'block' || 'fallback' || 'optional',
+              //strategy: 'selfHosted' || 'base64' || 'cdn',
+              // Other properties as per https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face (except 'src' & 'font-family') can go here i.e.
+              //[cssProperty]: 'value',
+            },
+          ],
+          selfHosted: [
+            {
+              family: "Open Sans",
+              urls: {
+                woff2: `/font/OpenSans400.woff2`,
+                woff: `/font/OpenSans400.woff`,
+                //[format]: '/[filepath]/[filename],
+              },
+              //[cssProperty]: 'value',
             },
           ],
         },
@@ -47,7 +60,7 @@ module.exports = {
         //   woff: `Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; rv:11.0) like Gecko`,
         //   woff2: `Mozilla/5.0 (Windows NT 10.0; Win64; x64; ServiceUI 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393`,
         // },
-        //formats: ['woff2', 'woff'],
+        //formats: ['woff2', 'woff', 'otf', 'ttf'],
         //useMinify: true,
         //usePreload: true,
         //usePreconnect: false,
@@ -85,7 +98,7 @@ module.exports = {
 };
 ```
 
-You can also supply the text parameter to perform character subsetting:
+You can also supply the text parameter or array of subsets to perform character subsetting:
 
 ```javascript
 module.exports = {
@@ -99,6 +112,11 @@ module.exports = {
               family: "Roboto",
               variants: ["300", "400", "500"],
               text: "Hello",
+            },
+            {
+              family: "Roboto",
+              variants: ["300", "400", "500"],
+              subsets: ["latin", ""],
             },
           ],
         },
@@ -188,6 +206,41 @@ module.exports = {
   ],
 };
 ```
+
+## Self Hosted Fonts
+
+Add your own self hosted font files. The plugin will handle the imports & preloading. Strategy is always `selfHosted`, subsets are already defined within your font file.
+
+```javascript
+module.exports = {
+  plugins: [
+    {
+      resolve: `gatsby-plugin-webfonts`,
+      options: {
+        fonts: {
+          selfHosted: [
+            {
+              family: "Open Sans",
+              urls: {
+                // src attributes
+                // path relative to gatsby project root
+                woff2: `/examplePath/filename.woff2`,
+                woff: `/examplePath/filename.woff`,
+                otf: `/examplePath/filename.otf`,
+                ttf: `/examplePath/filename.ttf`,
+              },
+              fontStyle: "light",
+              fontWeight: 300,
+            },
+          ],
+        },
+      },
+    },
+  ],
+};
+```
+
+As per gatsby docs it is recommended not to put fonts in the `/static` directory. This plugin will automatically be copy them across to `/public/webfonts/selfHosted`.
 
 ## License
 
