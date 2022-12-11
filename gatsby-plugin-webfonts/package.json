@@ -32,7 +32,7 @@
   "dependencies": {
     "axios": "^1.2.1",
     "cssnano": "^5.1.14",
-    "fs-extra": "^10.0.1",
+    "fs-extra": "^11.1.0",
     "lodash.isempty": "^4.4.0",
     "postcss": "^8.4.19",
     "postcss-js": "^4.0.0"
